@@ -3,54 +3,69 @@ const Feedback = require("./modules/login");
 const mongoose = require('mongoose');
 const path = require('path');
 const fs = require('fs');
+const login = require('./modules/login');
 const app = express();
 const port = 3000;
 
-mongoose.connect("mongodb://127.0.0.1:27017/guestbookDB");
+mongoose.connect("mongodb+srv://Prince:prince123@cluster0.brs0thn.mongodb.net/?appName=Cluster0")
+.then(()=>{
+    console.log("MongoDB Connected");
+})
+.catch((err)=>{
+    console.log(err);
+});
 
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, '..', 'Frontend')));
+app.use(express.static(path.join(__dirname, '..', 'Assets')));
 
 
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'Frontend', 'index.html'));
+    res.sendFile(path.join(__dirname, '..', 'Assets', 'index.html'));
 });
 
 
 
 
-app.post('/login', (req,res)=>{
+app.post('/login', async (req,res)=>{
+    const username = req.body.username;
+    const password = req.body.password;
 
-    // const username = req.body.username;
-    // const password = req.body.password;
+
+     
+
+});
+
+app.post('/signup', async (req,res)=>{
+    const username = req.body.username;
+     const password = req.body.password;
 
    
-    // try{
-    //     const newFeedback = new Feedback({
-    //         username,
-    //         email,
-    //         message
-    //     });
+     try{
+         const newlogin = new login({
+             username,
+             password
+         });
 
-    //     await newFeedback.save();
+         await newlogin.save();
 
-    //     console.log("Saved:", newFeedback);
+         console.log("Saved:", newlogin);
 
-    //     res.send("Feedback stored in MongoDB 🎉");
+         res.send("Login details stored in MongoDB 🎉");
 
-    // }catch(err){
-    //     console.log(err);
-    //     res.send("Database error");
-    // }
+    }catch(err){
+       console.log(err);
+        res.send("Database error");
+     }
+
 
 });
 
 
 
 
-app.listen(port,()=>{
+app.listen(port,"0.0.0.0",()=>{
     console.log(`server is running on port ${port}`)
 });

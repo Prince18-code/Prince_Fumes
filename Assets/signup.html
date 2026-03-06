@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account</title>
+
+<style>
+
+/* ===== PAGE CENTER ===== */
+body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#f1f3f6;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===== OUTER CARD (DIFFERENT LOOK) ===== */
+.outer{
+    width:760px;
+    height:480px;
+    background:#d7d7d4;
+    border-radius:14px;
+    box-shadow:0 0 30px rgba(0,0,0,0.2);
+    display:flex;
+    overflow:hidden;
+}
+
+/* ===== LEFT INFO PANEL ===== */
+
+/* ===== RIGHT FORM PANEL ===== */
+.right{
+    width:50%;
+    background:white;
+    padding:40px 35px;
+    box-sizing:border-box;
+}
+
+/* ===== LOGO ===== */
+.logo{
+    text-align:center;
+    margin-bottom:12px;
+}
+
+.logo img{
+    height:30px;
+}
+
+.subtitle{
+    text-align:center;
+    margin-bottom:18px;
+}
+
+/* ===== FORM ===== */
+.form label{
+    font-weight:bold;
+    font-size:14px;
+    display:block;
+    margin-top:15px;
+}
+
+.form input{
+    width:100%;
+    border:none;
+    border-bottom:1px solid #999;
+    padding:8px 2px;
+    font-size:14px;
+    outline:none;
+}
+
+/* ===== BUTTON ===== */
+#create{
+    width:100%;
+    margin-top:26px;
+    height:40px;
+    border:none;
+    border-radius:8px;
+    background:#d7d7d4;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+#create:hover{
+    background:#c8c8c5;
+}
+
+/* ===== LOGIN LINK ===== */
+.login-link{
+    margin-top:18px;
+    text-align:center;
+    font-size:14px;
+}
+
+.login-link a{
+    text-decoration:none;
+    font-weight:bold;
+    color:#000;
+}
+
+.login-link a:hover{
+    text-decoration:underline;
+}
+
+</style>
+
+<script>
+function validateForm(e){
+    const p = document.getElementById("password").value;
+    const c = document.getElementById("confirm").value;
+
+    if(p !== c){
+        e.preventDefault();
+        alert("Passwords do not match");
+    }
+}
+</script>
+
+</head>
+
+<body>
+
+<div class="outer">
+
+<!-- LEFT SIDE INFO -->
+
+<!-- RIGHT SIDE FORM -->
+<div class="right">
+
+    <div class="logo">
+        <img src="logo.png" alt="logo">
+    </div>
+
+    <p class="subtitle">Create a new account</p>
+
+    <div class="form">
+        <form action="/signup" method="POST" onsubmit="validateForm(event)">
+
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Choose username" required>
+
+            <label>Password</label>
+            <input id="password" type="password" name="password" placeholder="Create password" required>
+
+            <label>Confirm Password</label>
+            <input id="confirm" type="password" placeholder="Re-enter password" required>
+
+            <button id="create" type="submit">Create Account</button>
+
+        </form>
+    </div>
+
+    <div class="login-link">
+        Already have an account?
+        <a href="/loginpage.html">Sign In</a>
+    </div>
+
+</div>
+
+</div>
+
+</body>
+</html>
